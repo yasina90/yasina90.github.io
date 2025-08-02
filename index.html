@@ -13,6 +13,18 @@
       --dark: #212529;
       --gray: #6c757d;
       --border: #dee2e6;
+      /* Platform brand colors */
+      --orcid-green: #A6CE39;
+      --scopus-orange: #FF6C00;
+      --researchgate-teal: #00CCBB;
+      --email-blue: #1A73E8;
+      /* Organization brand colors */
+      --ieee-blue: #003A6C;
+      --acm-blue: #166DB7;
+      --isoc-navy: #0C1C2C;
+      --isoc-blue: #3A82E4;
+      --isoc-teal: #40B2A4;
+      --mendeley-red: #9B0000;
     }
     * {
       margin: 0;
@@ -26,21 +38,37 @@
       background-color: var(--light);
     }
     header {
-      background: var(--primary);
+      background: linear-gradient(120deg, #1a237e, #283593, #0050b3, #007396);
       color: white;
       text-align: center;
       padding: 2.5rem 1rem;
-      border-bottom: 4px solid var(--accent);
+      border-bottom: 4px solid rgba(0, 195, 187, 0.3);
+      position: relative;
+      overflow: hidden;
+    }
+    header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(circle at 30% 50%, rgba(166, 206, 57, 0.15), transparent 40%),
+                  radial-gradient(circle at 70% 30%, rgba(255, 108, 0, 0.1), transparent 35%);
+      pointer-events: none;
     }
     header h1 {
       font-size: 2.4rem;
       margin-bottom: 0.5rem;
       color: white;
+      position: relative;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.3);
     }
     header p {
       font-size: 1.2rem;
       opacity: 0.95;
       margin-bottom: 1rem;
+      position: relative;
     }
     .links {
       display: flex;
@@ -48,11 +76,12 @@
       gap: 12px;
       flex-wrap: wrap;
       margin-top: 1rem;
+      position: relative;
     }
     .links img {
       height: 24px;
       vertical-align: middle;
-      transition: transform 0.2s;
+      transition: transform 0.2s, filter 0.2s;
     }
     .links img:hover {
       transform: scale(1.08);
@@ -103,6 +132,8 @@
     .tag-noc { background: #f0f4c3; color: #33691e; }
     .tag-data { background: #ffecb3; color: #9c6600; }
     .tag-photonics { background: #f8bbd0; color: #880e4f; }
+    .tag-ml { background: #e3f2fd; color: #0d47a1; }
+    .tag-water { background: #e8f5e8; color: #1b5e20; }
     .publication {
       border-left: 3px solid var(--accent);
       padding-left: 1.1rem;
@@ -112,6 +143,14 @@
       font-size: 0.95em;
       color: var(--gray);
       margin: 0.3rem 0;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .doi::before {
+      content: '🔗';
+      font-size: 0.9em;
+      color: var(--accent);
     }
     .doi a {
       color: var(--accent);
@@ -119,6 +158,17 @@
     }
     .doi a:hover {
       text-decoration: underline;
+    }
+    .keywords {
+      font-size: 0.9em;
+      color: var(--gray);
+      margin: 0.4rem 0 0.6rem;
+      padding-left: 0.2rem;
+      font-style: italic;
+    }
+    .keywords strong {
+      color: var(--dark);
+      font-weight: 600;
     }
     .logos {
       display: flex;
@@ -156,32 +206,30 @@
     <h1>Yasin Asadi</h1>
     <p>🎓 Computer Engineer | 🧠 Artificial Intelligence & Machine Learning Researcher | 📊 Data Science & Analytics | 📘 Lecturer</p>
     <div class="links">
-      <!-- Clickable ORCID -->
-      <a href="https://orcid.org/0000-0001-8956-6403" target="_blank" rel="noopener">
-        <img src="https://img.shields.io/badge/ORCID-0000--0001--8956--6403-D2A500?logo=orcid&logoColor=white" alt="ORCID">
+      <!-- Clickable ORCID with official ORCID Green -->
+      <a href="https://orcid.org/0000-0001-8956-6403" target="_blank" rel="noopener" class="orcid-badge">
+        <img src="https://img.shields.io/badge/ORCID-0000--0001--8956--6403-A6CE39?logo=orcid&logoColor=white" alt="ORCID">
       </a>
-      <!-- Clickable Scopus -->
-      <a href="https://www.scopus.com/authid/detail.uri?authorId=57224466796" target="_blank" rel="noopener">
-        <img src="https://img.shields.io/badge/Scopus-Author%20ID%2057224466796-009999?logo=elsevier&logoColor=white" alt="Scopus">
+      <!-- Clickable Scopus with Elsevier Orange -->
+      <a href="https://www.scopus.com/authid/detail.uri?authorId=57224466796" target="_blank" rel="noopener" class="scopus-badge">
+        <img src="https://img.shields.io/badge/Scopus-Author%20ID%2057224466796-FF6C00?logo=elsevier&logoColor=white" alt="Scopus">
       </a>
-      <!-- Clickable ResearchGate -->
-      <a href="https://www.researchgate.net/profile/Yasin-Asadi" target="_blank" rel="noopener">
-        <img src="https://img.shields.io/badge/ResearchGate-Profile-blue?logo=researchgate&logoColor=white" alt="ResearchGate">
+      <!-- Clickable ResearchGate with official Teal -->
+      <a href="https://www.researchgate.net/profile/Yasin-Asadi" target="_blank" rel="noopener" class="researchgate-badge">
+        <img src="https://img.shields.io/badge/ResearchGate-Profile-00CCBB?logo=researchgate&logoColor=white" alt="ResearchGate">
       </a>
-      <!-- Clickable Email -->
-      <a href="mailto:yasinasadi@hotmail.com">
-        <img src="https://img.shields.io/badge/Email-yasinasadi%40hotmail.com-c14438?logo=microsoft-outlook&logoColor=white" alt="Email">
+      <!-- Clickable Email with professional blue -->
+      <a href="mailto:yasinasadi@hotmail.com" class="email-badge">
+        <img src="https://img.shields.io/badge/Email-yasinasadi%40hotmail.com-1A73E8?logo=microsoft-outlook&logoColor=white" alt="Email">
       </a>
     </div>
   </header>
-
   <main>
     <section>
       <h2>About</h2>
       <p>Computer Engineer, researcher, and lecturer specializing in <strong>Artificial Intelligence, Machine Learning, Data Science, and Network-on-Chip (NoC)</strong>. Holder of a Master of Science in <strong>Computer Architecture System Design</strong>. Currently teaching advanced topics at various universities, inspiring the next generation in computer engineering and intelligent systems.</p>
       <p>Extensive experience in peer review for leading journals from IEEE, Elsevier, Springer Nature, ACM, and IGI Global. Research focuses on bridging computer engineering with artificial intelligence, making impactful contributions in machine learning, data analytics, and network engineering.</p>
     </section>
-
     <section>
       <h2>Research Expertise</h2>
       <div class="logos">
@@ -198,16 +246,13 @@
       </div>
       <p><strong>Tools & Libraries:</strong> Python, Scikit-learn, Keras, TensorFlow, Matplotlib, Seaborn, Pandas, Mendeley</p>
     </section>
-
     <section>
       <h2>Education</h2>
       <h3>Master of Science in Computer Architecture System Design</h3>
       <p><em>Islamic Azad University, Central Tehran Branch</em> | 2015 – 2018</p>
-
       <h3>Bachelor of Science in Computer Engineering</h3>
       <p><em>Qazvin Islamic Azad University</em> | 2010 – 2015</p>
     </section>
-
     <section>
       <h2>Professional Experience</h2>
       <h3>Lecturer (Computer Engineering)</h3>
@@ -216,7 +261,6 @@
         <li>Teach advanced topics in AI, data science, and computer systems.</li>
         <li>Mentor students in research, technical projects, and academic writing.</li>
       </ul>
-
       <h3>Lecturer (Computer Engineering)</h3>
       <p><em>Islamic Azad University, Central Tehran Branch</em> | 2021 – Present</p>
       <ul>
@@ -224,7 +268,6 @@
         <li>Integrate machine learning and data analytics into engineering curriculum.</li>
       </ul>
     </section>
-
     <section>
       <h2>Publications</h2>
       <div class="publication">
@@ -234,11 +277,13 @@
           <em>Journal of Semiconductors</em>, 2025 | Journal Article
         </p>
         <div class="doi"><a href="https://doi.org/10.1088/1674-4926/24060006" target="_blank">DOI: 10.1088/1674-4926/24060006</a></div>
+        <div class="keywords">
+          <strong>Keywords:</strong> optical network-on-chip (ONoC), optical routers, microring resonators (MRRs), Mach−Zehnder interferometers (MZIs), optical networking scalability
+        </div>
         <span class="badge tag-noc">ONoC</span>
         <span class="badge tag-photonics">Photonics</span>
         <span class="badge">Router Design</span>
       </div>
-
       <div class="publication">
         <h3>Employing Machine Learning in Water Infrastructure Management: Predicting Pipeline Failures for Improved Maintenance and Sustainable Operations</h3>
         <p>
@@ -246,11 +291,15 @@
           <em>Industrial Artificial Intelligence</em>, 2024 | Journal Article
         </p>
         <div class="doi"><a href="https://doi.org/10.1007/s44244-024-00022-w" target="_blank">DOI: 10.1007/s44244-024-00022-w</a></div>
+        <div class="keywords">
+          <strong>Keywords:</strong> Machine learning, Water pipeline, Water management system, Logistic regression, XGBoost
+        </div>
         <span class="badge tag-ai">ML</span>
         <span class="badge tag-data">Predictive Maintenance</span>
-        <span class="badge">Sustainable Infrastructure</span>
+        <span class="badge tag-water">Water Infrastructure</span>
+        <span class="badge tag-ml">Logistic Regression</span>
+        <span class="badge tag-ml">XGBoost</span>
       </div>
-
       <div class="publication">
         <h3>A Comprehensive Study and Holistic Review of Empowering NoC Application Mapping through Machine Learning Techniques</h3>
         <p>
@@ -258,10 +307,13 @@
           <em>Discover Electronics</em>, 2024 | Journal Article
         </p>
         <div class="doi"><a href="https://doi.org/10.1007/s44291-024-00027-w" target="_blank">DOI: 10.1007/s44291-024-00027-w</a></div>
+        <div class="keywords">
+          <strong>Keywords:</strong> Network-on-Chip (NoC), Machine Learning (ML), Application Mapping, On-chip communication
+        </div>
         <span class="badge tag-ai">ML for Systems</span>
         <span class="badge tag-noc">Mapping Optimization</span>
+        <span class="badge">On-Chip Communication</span>
       </div>
-
       <div class="publication">
         <h3>The Art of Managing Complexity: A Book Review of Digital Design and Computer Architecture RISC-V Edition</h3>
         <p>
@@ -272,7 +324,6 @@
         <span class="badge">Computer Architecture</span>
         <span class="badge">RISC-V</span>
       </div>
-
       <div class="publication">
         <h3>An Overview of the Types of Network Operating Systems</h3>
         <p>
@@ -282,7 +333,6 @@
         <span class="badge">NOS</span>
         <span class="badge">Networking</span>
       </div>
-
       <div class="publication">
         <h3>Mind-Shift: A Method for Power and Energy Reduction in Application Mapping onto Network-on-Chip Architectures</h3>
         <p>
@@ -293,7 +343,6 @@
         <span class="badge tag-noc">NoC</span>
         <span class="badge">Energy Efficiency</span>
       </div>
-
       <div class="publication">
         <h3>A Novel Approach in Application Mapping for Two-Dimensional Wireless NoC (WiNoC) in Power Reduction</h3>
         <p>
@@ -303,7 +352,6 @@
         <span class="badge tag-noc">WiNoC</span>
         <span class="badge">Power Optimization</span>
       </div>
-
       <div class="publication">
         <h3>Introduction of AI</h3>
         <p>
@@ -314,34 +362,30 @@
         <span class="badge tag-ai">AI Education</span>
       </div>
     </section>
-
     <section>
       <h2>Peer Review Activity</h2>
       <p>Extensive peer review experience for top-tier scientific publishers including IEEE, Elsevier, Springer Nature, ACM, and IGI Global. Contributed numerous reviews across journals in artificial intelligence, machine learning, computer networks, embedded systems, and sustainable computing — supporting academic excellence and innovation in engineering research.</p>
     </section>
-
     <section>
       <h2>Professional Memberships & Affiliations</h2>
       <ul>
-        <li><img src="https://img.shields.io/badge/IEEE-%23007396.svg?logo=IEEE&logoColor=white" alt="IEEE" style="vertical-align:middle; height:22px; margin-right:6px;"> <strong>IEEE</strong> (Institute of Electrical and Electronics Engineers)</li>
-        <li><img src="https://img.shields.io/badge/ACM-%23000000.svg?logo=ACM&logoColor=white" alt="ACM" style="vertical-align:middle; height:22px; margin-right:6px;"> <strong>ACM</strong> (Association for Computing Machinery)</li>
-        <li><img src="https://img.shields.io/badge/CSTA-%230066CC.svg?logo=Computer%20Science%20Teachers%20Association&logoColor=white" alt="CSTA" style="vertical-align:middle; height:22px; margin-right:6px;"> <strong>CSTA</strong> (Computer Science Teachers Association)</li>
-        <li><img src="https://img.shields.io/badge/Internet%20Society-%23000000.svg?logo=internet%20society&logoColor=white" alt="ISOC" style="vertical-align:middle; height:22px; margin-right:6px;"> <strong>Internet Society (ISOC)</strong></li>
+        <li><img src="https://img.shields.io/badge/IEEE-%23003A6C.svg?logo=IEEE&logoColor=white" alt="IEEE" style="vertical-align:middle; height:22px; margin-right:6px;"> <strong>IEEE</strong> (Institute of Electrical and Electronics Engineers)</li>
+        <li><img src="https://img.shields.io/badge/ACM-%23166DB7.svg?logo=ACM&logoColor=white" alt="ACM" style="vertical-align:middle; height:22px; margin-right:6px;"> <strong>ACM</strong> (Association for Computing Machinery)</li>
+        <li><img src="https://img.shields.io/badge/CSTA-%23000000.svg?logo=Computer%20Science%20Teachers%20Association&logoColor=white" alt="CSTA" style="vertical-align:middle; height:22px; margin-right:6px;"> <strong>CSTA</strong> (Computer Science Teachers Association)</li>
+        <li><img src="https://img.shields.io/badge/Internet%20Society-%230C1C2C.svg?logo=internet%20society&logoColor=white" alt="ISOC" style="vertical-align:middle; height:22px; margin-right:6px;"> <strong>Internet Society (ISOC)</strong></li>
         <li><img src="https://img.shields.io/badge/IAENG-%23000080.svg?logo=IAENG&logoColor=white" alt="IAENG" style="vertical-align:middle; height:22px; margin-right:6px;"> <strong>IAENG</strong> (International Association of Engineers)</li>
-        <li><img src="https://img.shields.io/badge/Mendeley-%23000000.svg?logo=Mendeley&logoColor=white" alt="Mendeley" style="vertical-align:middle; height:22px; margin-right:6px;"> <strong>Mendeley Advisor</strong>, Mendeley Inc.</li>
+        <li><img src="https://img.shields.io/badge/Mendeley-%239B0000.svg?logo=Mendeley&logoColor=white" alt="Mendeley" style="vertical-align:middle; height:22px; margin-right:6px;"> <strong>Mendeley Advisor</strong>, Mendeley Inc.</li>
         <li><img src="https://img.shields.io/badge/I2OR-%238B4513.svg?logo=I2OR&logoColor=white" alt="I2OR" style="vertical-align:middle; height:22px; margin-right:6px;"> <strong>I2OR</strong> (International Institute of Organized Research) – Honorary County Ambassador (IT)</li>
         <li><img src="https://img.shields.io/badge/Young%20Researchers%20Club-%23000080.svg?logo=IAENG&logoColor=white" alt="YREC" style="vertical-align:middle; height:22px; margin-right:6px;"> <strong>Young Researchers and Elite Club, Tehran</strong></li>
       </ul>
     </section>
-
     <section>
       <h2>Awards & Recognition</h2>
       <ul>
         <li><strong>Best Reviewer of the Year 2023</strong> – Journal of Electrical Engineering & Technology</li>
-        <li><strong>Top Graduate Award</strong> – Islamic Azad University, Central Tehran Branch</li>
+        <li><strong>Top Graduate Award</strong> – Islamic Azad University, Central Tehran Branch, 2018</li>
       </ul>
     </section>
-
     <section>
       <h2>Research Interests</h2>
       <div class="logos">
@@ -359,7 +403,6 @@
       </div>
     </section>
   </main>
-
   <footer>
     <p>© 2025 Yasin Asadi. Website built with HTML for GitHub Pages.</p>
     <p>Research profiles: 
